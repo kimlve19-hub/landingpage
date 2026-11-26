@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8faff">
+  <title>nsh.editz — make your ideas look lovely</title>
+  <meta name="description" content="Cute digital products and creative editing services by nsh.editz.">
+  <style>
+    :root {
+      --bg: #f8faff;
+      --blue: #a8c8f0;
+      --blue-dark: #7197c6;
+      --lilac: #ded5f8;
+      --ink: #465875;
+      --muted: #8794aa;
+      --white: #ffffff;
+      --line: rgba(145, 171, 211, .22);
+      --shadow: 0 18px 50px rgba(116, 145, 190, .14);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(222,213,248,.42), transparent 28rem),
+        radial-gradient(circle at 92% 30%, rgba(168,200,240,.35), transparent 25rem),
+        var(--bg);
+      font-family: "Poppins", "Nunito", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1100px, calc(100% - 36px)); margin: auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(248,250,255,.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      min-height: 72px; display: flex; align-items: center;
+      justify-content: space-between; gap: 18px;
+    }
+    .brand { font-weight: 800; letter-spacing: -.04em; font-size: 1.25rem; color: var(--blue-dark); }
+    .brand span { color: #b8a9e6; }
+    .nav-links { display: flex; align-items: center; gap: 24px; font-size: .88rem; color: #71819a; }
+    .nav-links a:hover { color: var(--blue-dark); }
+    .nav-cta, .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border-radius: 999px; padding: 12px 20px; font-weight: 700; font-size: .9rem;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .nav-cta, .btn-primary { background: var(--blue); color: white; box-shadow: 0 8px 22px rgba(130,168,216,.25); }
+    .btn-secondary { background: rgba(255,255,255,.75); border: 1px solid var(--line); color: var(--blue-dark); }
+    .btn:hover, .nav-cta:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .hero { min-height: 650px; display: grid; align-items: center; padding: 70px 0 90px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 55px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; gap: 9px; align-items: center; color: var(--blue-dark);
+      background: rgba(255,255,255,.7); border: 1px solid var(--line);
+      border-radius: 999px; padding: 8px 14px; font-size: .78rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    h1 { font-size: clamp(3rem, 7vw, 5.7rem); line-height: .98; letter-spacing: -.07em; margin: 22px 0; color: #5d7fae; }
+    h1 em { font-style: normal; color: #b4a4e3; }
+    .hero p { max-width: 460px; color: var(--muted); font-size: 1.04rem; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-note { margin-top: 24px; color: #a1aabd; font-size: .78rem; }
+    .art-board { position: relative; min-height: 420px; }
+    .blob { position: absolute; inset: 35px 25px 35px 35px; background: linear-gradient(140deg, #e7e0fb, #d7e8fb); border-radius: 43% 57% 60% 40% / 48% 40% 60% 52%; transform: rotate(-7deg); }
+    .mock-card {
+      position: absolute; background: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.9);
+      border-radius: 24px; box-shadow: var(--shadow); padding: 18px; backdrop-filter: blur(12px);
+    }
+    .mock-main { width: 72%; top: 70px; left: 9%; transform: rotate(-5deg); }
+    .mock-top { display: flex; justify-content: space-between; font-size: .72rem; color: #9aa8bf; margin-bottom: 14px; }
+    .mock-cover {
+      min-height: 220px; border-radius: 17px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between;
+      background: linear-gradient(145deg, #b9d5f5, #e5dcfa);
+      color: white; overflow: hidden; position: relative;
+    }
+    .mock-cover:after { content: "✦"; position: absolute; font-size: 9rem; right: -15px; bottom: -58px; color: rgba(255,255,255,.25); }
+    .mock-cover small { letter-spacing: .15em; font-size: .65rem; }
+    .mock-cover strong { font-size: 2rem; line-height: 1.05; letter-spacing: -.05em; max-width: 190px; z-index: 1; }
+    .mock-cover span { font-size: .75rem; z-index: 1; }
+    .float-note { right: 0; bottom: 65px; width: 155px; transform: rotate(7deg); }
+    .float-note strong { display: block; color: #9d8bd4; font-size: 1rem; }
+    .float-note small { color: #a1aabd; }
+    .spark { position: absolute; color: #b9a8e8; font-size: 2rem; }
+    .spark.one { top: 25px; right: 45px; }
+    .spark.two { bottom: 30px; left: 20px; font-size: 1.4rem; }
+    section { padding: 80px 0; }
+    .section-head { text-align: center; max-width: 600px; margin: 0 auto 38px; }
+    .section-head .eyebrow { margin-bottom: 13px; }
+    h2 { font-size: clamp(2rem, 4.5vw, 3.3rem); line-height: 1.1; letter-spacing: -.055em; color: #6c8fbd; margin: 0 0 14px; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .preview {
+      background: rgba(255,255,255,.75); border: 1px solid var(--line); border-radius: 24px; padding: 14px;
+      box-shadow: 0 10px 30px rgba(116,145,190,.08); transition: transform .25s ease;
+    }
+    .preview:hover { transform: translateY(-6px); }
+    .preview-art { aspect-ratio: 4 / 3; border-radius: 16px; display: grid; place-items: center; overflow: hidden; position: relative; }
+    .preview-art span { font-size: 2.1rem; color: rgba(255,255,255,.9); font-weight: 800; letter-spacing: -.06em; text-align: center; }
+    .art-a { background: linear-gradient(135deg, #a8c8f0, #d8cdf5); }
+    .art-b { background: linear-gradient(135deg, #e3dafa, #b8d8f4); }
+    .art-c { background: linear-gradient(135deg, #c5dff4, #e8dff8); }
+    .preview h3 { margin: 14px 4px 3px; font-size: 1rem; }
+    .preview p { margin: 0 4px 5px; color: var(--muted); font-size: .82rem; }
+    .services { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .service {
+      border-radius: 28px; padding: 30px; background: rgba(255,255,255,.72);
+      border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(116,145,190,.07);
+    }
+    .service-icon { width: 52px; height: 52px; border-radius: 17px; display: grid; place-items: center; background: #e8e2fb; color: #9a89d2; font-size: 1.5rem; }
+    .service:nth-child(2) .service-icon { background: #e1effc; color: #7fa8d6; }
+    .service h3 { margin: 18px 0 8px; font-size: 1.3rem; }
+    .service p { margin: 0 0 16px; color: var(--muted); font-size: .92rem; }
+    .service ul { margin: 0; padding-left: 18px; color: #7d8ba2; font-size: .88rem; }
+    .order-box {
+      background: linear-gradient(135deg, rgba(213,229,249,.85), rgba(229,220,250,.88));
+      border: 1px solid rgba(255,255,255,.8); border-radius: 32px; padding: clamp(28px, 6vw, 60px);
+      text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .order-box:before { content: "♡"; position: absolute; font-size: 10rem; right: 3%; top: -70px; color: rgba(255,255,255,.25); }
+    .order-box p { color: #7d8ba2; max-width: 520px; margin: 0 auto 25px; }
+    .order-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; position: relative; }
+    footer { padding: 28px 0 40px; text-align: center; color: #a1aabd; font-size: .8rem; }
+    footer a { color: var(--blue-dark); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+    @media (max-width: 760px) {
+      .nav-inner { min-height: 64px; }
+      .nav-links { gap: 13px; font-size: .78rem; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .nav-cta { padding: 10px 15px; }
+      .hero { min-height: auto; padding: 60px 0 45px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+      .hero-copy { text-align: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-note { margin-top: 18px; }
+      .art-board { min-height: 350px; max-width: 440px; width: 100%; margin: auto; }
+      .mock-main { top: 45px; }
+      .mock-cover { min-height: 180px; }
+      .preview-grid { grid-template-columns: 1fr 1fr; }
+      .preview:last-child { grid-column: 1 / -1; max-width: calc(50% - 9px); justify-self: center; }
+      .services { grid-template-columns: 1fr; }
+      section { padding: 58px 0; }
+    }
+    @media (max-width: 420px) {
+      .preview-grid { grid-template-columns: 1fr; }
+      .preview:last-child { grid-column: auto; max-width: none; }
+      .art-board { min-height: 310px; }
+      .mock-main { width: 78%; left: 5%; }
+      .mock-cover { min-height: 155px; }
+      .mock-cover strong { font-size: 1.6rem; }
+      .float-note { width: 135px; bottom: 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *:before, *:after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- GANTI link WEBSITE UTAMA dan WhatsApp pada bagian CONFIG di bawah script. -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#home">nsh.editz <span>♡</span></a>
+      <nav class="nav-links" aria-label="Navigasi">
+        <a href="#preview">Preview</a>
+        <a href="#services">Services</a>
+        <a class="nav-cta" href="#order">Order now ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">✦ little creative studio</span>
+          <h1>make your<br>ideas look <em>lovely.</em></h1>
+          <p>Creative templates and cute edits to make your ideas feel a little more you. Find your next favorite design here ♡</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#preview">Explore designs ✦</a>
+            <a class="btn btn-secondary" href="#order">Let's order</a>
+          </div>
+          <div class="hero-note">digital products · creative edits · made with love</div>
+        </div>
+        <div class="art-board reveal" aria-label="Ilustrasi preview desain">
+          <div class="blob"></div>
+          <span class="spark one">✧</span><span class="spark two">♡</span>
+          <div class="mock-card mock-main">
+            <div class="mock-top"><span>nsh.editz moodboard</span><span>01 / 03</span></div>
+            <div class="mock-cover">
+              <small>YOUR NEXT PRESENTATION</small>
+              <strong>soft blue<br>dreams.</strong>
+              <span>editable template ♡</span>
+            </div>
+          </div>
+          <div class="mock-card float-note">
+            <small>made for your ideas</small>
+            <strong>pretty & useful</strong>
+            <small>✦ digital goodies</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="preview">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">a little preview</span>
+          <h2>Pick your pretty.</h2>
+          <p>A few design vibes to start with. More goodies are waiting in the full shop.</p>
+        </div>
+        <div class="preview-grid">
+          <article class="preview reveal">
+            <div class="preview-art art-a"><span>soft<br>presentation</span></div>
+            <h3>PPT Templates</h3><p>Make your slides feel lovely.</p>
+          </article>
+          <article class="preview reveal">
+            <div class="preview-art art-b"><span>canva<br>goodies ♡</span></div>
+            <h3>Canva Templates</h3><p>Editable designs for your ideas.</p>
+          </article>
+          <article class="preview reveal">
+            <div class="preview-art art-c"><span>your idea<br>your style</span></div>
+            <h3>Custom Designs</h3><p>Personalized just the way you need.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">what we create</span>
+          <h2>Little things, lovely results.</h2>
+          <p>Need something ready-made, or a design made especially for you?</p>
+        </div>
+        <div class="services">
+          <article class="service reveal">
+            <div class="service-icon">✧</div>
+            <h3>Digital Products</h3>
+            <p>Ready-to-use and editable digital designs for school, projects, and everyday creativity.</p>
+            <ul><li>PPT & presentation templates</li><li>Canva templates</li><li>Digital design goodies</li></ul>
+          </article>
+          <article class="service reveal">
+            <div class="service-icon">♡</div>
+            <h3>Edit Services</h3>
+            <p>Tell us your idea and let’s turn it into a design that matches your mood.</p>
+            <ul><li>Presentation & report design</li><li>Aesthetic photo edits</li><li>Custom design requests</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="order">
+      <div class="wrap">
+        <div class="order-box reveal">
+          <span class="eyebrow">your idea starts here</span>
+          <h2>Ready to make it lovely?</h2>
+          <p>Browse the full collection or message us to order a product and request a custom edit. We’ll be happy to help you find the right design ♡</p>
+          <div class="order-actions">
+            <a class="btn btn-primary" id="wa-link" href="#" target="_blank" rel="noopener">Order via WhatsApp ↗</a>
+            <a class="btn btn-secondary" id="site-link" href="#" target="_blank" rel="noopener">Visit full website</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">made with ♡ by <a href="#home">nsh.editz</a> · make your ideas look lovely</div>
+  </footer>
+
+  <script>
+    // CONFIG: ganti dengan link asli sebelum dipublikasikan.
+    const CONFIG = {
+      whatsapp: "https://wa.me/62XXXXXXXXXXX",
+      website: "https://USERNAME.github.io/REPO/"
+    };
+
+    document.getElementById("wa-link").href = CONFIG.whatsapp;
+    document.getElementById("site-link").href = CONFIG.website;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
